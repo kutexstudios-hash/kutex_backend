@@ -1,0 +1,73 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+<style>
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .stat-card {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 15px 20px;
+        color: #f8fafc;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .stat-card h3 {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .stat-card .number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-top: 5px;
+        color: #38bdf8;
+    }
+    .stat-card.warning .number { color: #fbbf24; }
+    .stat-card.danger .number { color: #f87171; }
+    .stat-card.success .number { color: #4ade80; }
+</style>
+
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <h3>👥 Toplam Kullanıcı</h3>
+        <div class="number">{{ total_users }}</div>
+    </div>
+    <div class="stat-card warning">
+        <h3>📧 Bekleyen Mail Doğrulama</h3>
+        <div class="number">{{ unverified_emails }}</div>
+    </div>
+    <div class="stat-card success">
+        <h3>🎮 Toplam Oyun</h3>
+        <div class="number">{{ total_games }}</div>
+    </div>
+    <div class="stat-card">
+        <h3>📰 Toplam Haber</h3>
+        <div class="number">{{ total_news }}</div>
+    </div>
+    <div class="stat-card warning">
+        <h3>📝 Bekleyen Alpha Başvurusu</h3>
+        <div class="number">{{ pending_alpha }}</div>
+    </div>
+    <div class="stat-card danger">
+        <h3>🎫 Açık Destek Talepleri</h3>
+        <div class="number">{{ open_tickets }}</div>
+    </div>
+    <div class="stat-card danger">
+        <h3>🐞 Açık Bug Raporları</h3>
+        <div class="number">{{ pending_bugs }}</div>
+    </div>
+    <div class="stat-card success">
+        <h3>📢 Aktif Duyurular</h3>
+        <div class="number">{{ active_announcements }}</div>
+    </div>
+</div>
+
+{{ block.super }}
+{% endblock %}
